@@ -1,0 +1,19 @@
+{
+  "name": "testproject",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "main.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "author": "mutawa",
+  "license": "MIT",
+  "dependencies": {
+    "convert-months-year": "^1.0.5",
+    "express": "^4.17.1",
+    "moment": "^2.29.1",
+    "moment-duration-format": "^2.3.2",
+    "prompt-sync": "^4.2.0",
+    "pug": "^3.0.2"
+  }
+}
