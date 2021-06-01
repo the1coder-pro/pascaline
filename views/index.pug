@@ -15,11 +15,16 @@ head
 
             div(class="container")
                 h1 AgeCalculator 
-                br
-                form(action="/"  onsubmit="return validateForm()" method="post" name="dateForm")
+                <br/>
+                //- - var inputYear = document.forms["dateForm"]["inputYear"].value;                
+                //- - var inputMonth = document.forms["dateForm"]["inputMonth"].value;
+                //- - var inputDay = document.getElementById("inputDay").value;
+                //- - var actionLink = `/${inputYear}/${inputMonth}/${inputDay}/`;
+                
+                form(onsubmit="return validateForm()" method="post"  name="dateForm")
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-default">YEAR</span>
-                        <input type="number" class="form-control" name="inputYear" id="inputYear" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        input(type="number" autofocus class="form-control" name="inputYear" id="inputYear" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default")
                     </div>
 
                     <div class="input-group mb-3">
@@ -33,7 +38,7 @@ head
 
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-default">DAY</span>
-                        <input type="number" min="1" max="31" class="form-control" name="inputDay" id="inputDay" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        input(type="number" min="1" max="31" class="form-control" name="inputDay" id="inputDay" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default")
                     </div>
                     <div class="col text-center">
                         input(type="submit" class="btn btn-primary btn-lg" value="Calculate")
@@ -45,23 +50,39 @@ head
 
             script(type='text/javascript').
                 function validateForm() {
+                    var inputYear = document.forms["dateForm"]["inputYear"].value;                
                     var inputMonth = document.forms["dateForm"]["inputMonth"].value;
                     var inputDay = document.forms["dateForm"]["inputDay"].value;
-                    console.log(inputMonth)
-                    console.log(inputDay)
+
+                    var parsedYearInput = parseInt(inputYear);
                     var parsedMonthInput = parseInt(inputMonth);
                     var parsedDayInput = parseInt(inputDay);
+
                     // Months with only 30 days are 4, 6, 9, 11
                     const monthsWith30days = [4, 6, 9, 11];
-                    if (inputDay != ""){
-                        if (parsedMonthInput == 2 && parsedMonthInput > 28){
-                            alert("do you know that February just have 28 days")
+
+                    let ts = Date.now();
+                    let date_ob = new Date(ts);
+                    var current_year = date_ob.getFullYear();
+
+                    if (inputYear != "" && inputDay != ""){
+                        if (parsedYearInput > current_year){
+                            alert(`you can't enter a year greater than ${current_year} the current year`)
+                            return false
+                        }else if (parsedMonthInput == 2 && parsedDayInput > 28){
+                            alert("do you know that February only has 28 days")
                             return false;
                         }else if (monthsWith30days.includes(parsedMonthInput) && parsedDayInput > 30){
                             alert("the month you chosen only have 30 days")
                             return false;
+                        }else {
+                            document.dateForm.action=`/${inputYear}/${inputMonth}/${inputDay}`;
+                            return true;
                         }
 
+                    }else {
+                        alert("fill the form Please")
+                        return false
                     }
                         
                 }   
