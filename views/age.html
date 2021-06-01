@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Pascaline</a>
+        </div>
+      </nav>
+    <title>Age Calculator</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Age Calculator</h1>
+        <br>
+        <form action="/age" method="post">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">YEAR</span>
+                <input type="number" class="form-control" name="inputYear" id="inputYear" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+              </div>
+
+              <div class="input-group mb-3">
+                <label class="input-group-text" for="inputMonth">MONTH</label>
+                <select class="form-select" name="inputMonth" id="inputMonth">
+                    {% for num, month in monthsOptions %}
+                        <option value={{num}}>{{ month }}</option>
+                    {% endfor %}
+                </select>
+              </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">DAY</span>
+                
+                <input type="number" min="1" max="31" class="form-control" name="inputDay" id="inputDay" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+              </div>
+            <!-- <input type="date" class="form-control" name="dateInput" id="date_Input"> -->
+            <input style="margin: 0 auto; float: none" type="submit" class="btn btn-primary btn-lg" value="Calculate">
+        </form>
+        <br>
+        {% if showErrorMessage %}
+        <div class="alert alert-warning" role="alert">
+            <p>{{errorMessage}}</p>
+        </div>
+        {% endif %}
+        {% if showTimes %}
+            <h1>{{ years }} Years old</h1>
+            {% if months != 0 %}
+                <h1>And {{ months }} Months</h1>
+            {% endif %}
+            {% if days != 0 %}
+                <h1>And {{ days }} Days</h1>
+            {% endif %}
+    
+            <h2>Or {{YearsToMonths}} Months and {{restOfMonths}} Days</h2>
+            <h2>Or {{Weeks}} Weeks and {{restOfWeeks}} Days</h2>
+            <h3>Or {{AgeInDays}} Days</h3>
+            <h3>Or {{Hours}} Hours</h3>
+            <h3>Or {{Minutes}} Minutes</h3>
+            <h3>Or {{Seconds}} Seconds</h3>
+
+            <h5>Or {{Milliseconds}} Milliseconds</h5>
+            <h5>Or {{MicroSeconds}} MicroSeconds</h5>
+            <h5>Or {{NanoSeconds}} NanoSeconds</h5>
+
+        {% endif %}
+      </div>
+</body>
+</html>

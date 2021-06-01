@@ -5,17 +5,6 @@ head
     meta(http-equiv="X-UA-Compatible" content="IE=edge")/
     meta(name="viewport" content="width=device-width, initial-scale=1.0")/
     link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous")/
-    link(rel="preconnect" href="https://fonts.gstatic.com")
-    link(href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet")
-    style.
-        #calculatedAge {
-            font-family: Playfair Display, serif;
-            font-size: 40px;
-        }
-        .input-group {
-            padding-left: 40px;
-            padding-right: 40px;
-        }
     script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous")
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
@@ -25,8 +14,12 @@ head
         <body>
 
             div(class="container")
-                h1(style="font-family: 'Playfair Display', serif; font-size: 300%; text-align: center;") AgeCulator 
+                h1 AgeCalculator 
                 <br/>
+                //- - var inputYear = document.forms["dateForm"]["inputYear"].value;                
+                //- - var inputMonth = document.forms["dateForm"]["inputMonth"].value;
+                //- - var inputDay = document.getElementById("inputDay").value;
+                //- - var actionLink = `/${inputYear}/${inputMonth}/${inputDay}/`;
                 
                 form(onsubmit="return validateForm()" method="post"  name="dateForm")
                     <div class="input-group mb-3">
@@ -48,29 +41,21 @@ head
                         input(type="number" min="1" max="31" class="form-control" name="inputDay" id="inputDay" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default")
                     </div>
                     <div class="col text-center">
-                        input(type="submit" class="btn btn-dark btn-lg" value="Calculate")
+                        input(type="submit" class="btn btn-primary btn-lg" value="Calculate")
                     </div>
             if showMessage
                 div(class="alert alert-warning" role="alert")= theMessage
             else if !showMessage && theMessage == "Thank you"
                 div(class="alert alert-success" role="alert")= theMessage
-        div(class="container" style="padding:14px")
+
             if showTimes
                 if age_years != 0
-                    h1(id="calculatedAge" style="font-size: 60px") #{age_years} Years Old
+                    h1 #{age_years} Years Old
                 if age_months != 0
-                    h1(id="calculatedAge") #{age_months} Months
+                    h1 #{age_months} Months
                 if age_days != 0
-                    h1(id="calculatedAge") #{age_days} Days
-                h2 Or #{yearsToMonths} Months and #{restOfMonths} Days
-                h2 Or #{monthsToWeeks} Weeks and #{restOfWeeks} Days
-                h3 Or #{ageInDays} Days
-                h3 Or #{hours} Hours 
-                h3 Or #{minutes} Minutes
-                h3 Or #{seconds} Seconds
-                h5 Or #{milliseconds} Milliseconds
-                h5 Or #{microseconds} Microseconds
-                h5 Or #{nanoseconds} NanoSeconds
+                    h1 #{age_days} Days
+
 
             script(type='text/javascript').
                 function validateForm() {
