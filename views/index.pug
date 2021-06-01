@@ -12,10 +12,11 @@ head
         </div>
     </nav>
         <body>
+
             div(class="container")
                 h1 AgeCalculator 
                 br
-                form(action="/result" method="post")
+                form(action="/"  onsubmit="return validateForm()" method="post" name="dateForm")
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-default">YEAR</span>
                         <input type="number" class="form-control" name="inputYear" id="inputYear" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
@@ -41,5 +42,26 @@ head
                 div(class="alert alert-warning" role="alert")= theMessage
             else if !showMessage && theMessage == "Thank you"
                 div(class="alert alert-success" role="alert")= theMessage
-             
-                
+
+            script(type='text/javascript').
+                function validateForm() {
+                    var inputMonth = document.forms["dateForm"]["inputMonth"].value;
+                    var inputDay = document.forms["dateForm"]["inputDay"].value;
+                    console.log(inputMonth)
+                    console.log(inputDay)
+                    var parsedMonthInput = parseInt(inputMonth);
+                    var parsedDayInput = parseInt(inputDay);
+                    // Months with only 30 days are 4, 6, 9, 11
+                    const monthsWith30days = [4, 6, 9, 11];
+                    if (inputDay != ""){
+                        if (parsedMonthInput == 2 && parsedMonthInput > 28){
+                            alert("do you know that February just have 28 days")
+                            return false;
+                        }else if (monthsWith30days.includes(parsedMonthInput) && parsedDayInput > 30){
+                            alert("the month you chosen only have 30 days")
+                            return false;
+                        }
+
+                    }
+                        
+                }   
