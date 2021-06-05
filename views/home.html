@@ -1,16 +1,16 @@
 <html lang="en">
-title AgeCulator
+<title>AgeCulator</title>
 
-head
-    meta(charset="UTF-8")/
-    meta(http-equiv="X-UA-Compatible" content="IE=edge")/
-    meta(name="viewport" content="width=device-width, initial-scale=1.0")/
-    link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous")/
-    link(rel="preconnect" href="https://fonts.gstatic.com")
-    link(href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet")
-    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous")
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
-    style.
+    <style>
         .input-group {
             padding-left: 40px;
             padding-right: 40px;
@@ -18,9 +18,11 @@ head
         #calculateBtn, #full-result{
             margin-left: 40px;
         }
+    </style>
+</head>
+    <body>
 
-<body>
-    script(type='text/javascript').
+    <script>
             var find_age = (current_date, current_month, current_year, birth_date, birth_month, birth_year) => {
 
             var month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -208,6 +210,7 @@ head
                 document.getElementById("result").innerHTML = `<h1 style="font-size: 32px; font-family: 'Playfair Display', serif;">${ageString}</h1>`;
                 
                 document.getElementById("more-result").innerHTML = "";
+                document.getElementById("moreStuff").innerHTML = "";
 
                 var contents = [`Or ${numberWithCommas(Months)} Months and ${age.days} Days`,`Or ${numberWithCommas(Weeks)} Weeks and ${restOfWeeks} Days`, `Or ${numberWithCommas(age.daysAge)} days`, `Or ${numberWithCommas(Hours)} Hours`, `Or ${numberWithCommas(Minutes)} Minutes`, `Or ${numberWithCommas(Seconds)} Seconds`]
                 var moreStuffList = [ `Or ${numberWithCommas(Milliseconds)} MilliSeconds`, `Or ${numberWithCommas(MicroSeconds)} MicroSeconds`, `Or ${numberWithCommas(NanoSeconds)} NanoSeconds`]
@@ -233,17 +236,18 @@ head
             }
             
         }
+    </script>    
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
           <a class="navbar-brand" href="/">Pascaline</a>
         </div>
     </nav>
     <div class="container">
-        h1(style="font-family: 'Playfair Display', serif; font-size: 300%; text-align: center;") AgeCulator
+        <h1 style="font-family: 'Playfair Display', serif; font-size: 300%; text-align: center;">AgeCulator</h1>
         <br>
         <div class="input-group mb-3">
             <span class="input-group-text" id="inputGroup-sizing-default">YEAR</span>
-            input(type="number" class="form-control" id="dobyear" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required)
+            <input type="number" class="form-control" id="dobyear" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
     </div>
     <div class="input-group mb-3">
         <label class="input-group-text" for="inputMonth">MONTH</label>
@@ -265,13 +269,13 @@ head
   
     <div class="input-group mb-3">
         <span class="input-group-text" id="inputGroup-sizing-default">DAY</span>
-        input(type="number" class="form-control" id="dobday" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required)
+        <input type="number" class="form-control" id="dobday" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
     </div>
     
-    input(type="submit"  class="btn btn-dark btn-lg" style="margin-bottom: 20px" onclick="ageCalculator()" id="calculateBtn" value="Calculate")
+    <input type="submit"  class="btn btn-dark btn-lg" style="margin-bottom: 20px" onclick="ageCalculator()" id="calculateBtn" value="Calculate">
     
     <span id="message" style="color:red; margin: 20px"> </span>
-    br
+    <br>
     <div id="full-result">
     <div id="result"></div>
     <div id="more-result">
@@ -291,3 +295,4 @@ head
 
 </body>
 
+</html>
