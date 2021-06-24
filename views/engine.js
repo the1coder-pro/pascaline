@@ -155,7 +155,6 @@ function ageCalculator() {
             daysAge: Difference_In_Days
         };
 
-
         if ((age.years > 0) && (age.months > 0) && (age.days > 0))
             ageString = age.years + " years, " + age.months + " months, and " + age.days + " days old.";
         else if ((age.years == 0) && (age.months == 0) && (age.days > 0))
