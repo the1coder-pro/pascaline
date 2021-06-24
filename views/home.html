@@ -2,104 +2,112 @@
 <title>AgeCulator</title>
 
 <!-- Hello This is a Comment in HTML -->
+<!-- This is Good :) -->
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
 
     <style>
         .input-group {
             padding-left: 40px;
             padding-right: 40px;
         }
-        #calculateBtn, #full-result{
+
+        #calculateBtn,
+        #full-result {
             margin-left: 40px;
         }
     </style>
 </head>
-    <body>
+
+<body>
 
     <script>
-            var find_age = (current_date, current_month, current_year, birth_date, birth_month, birth_year) => {
+        var find_age = (current_date, current_month, current_year, birth_date, birth_month, birth_year) => {
 
             var month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-        
+
             if (birth_date > current_date) {
-              current_month = current_month - 1;
-              current_date = current_date + month[birth_month - 1]
+                current_month = current_month - 1;
+                current_date = current_date + month[birth_month - 1]
             }
-        
+
             if (birth_month > current_month) {
-              current_year = current_year - 1;
-              current_month = current_month + 12;
+                current_year = current_year - 1;
+                current_month = current_month + 12;
             }
-        
+
             var calculated_date = current_date - birth_date;
             var calculated_month = current_month - birth_month;
             var calculated_year = current_year - birth_year;
-        
+
             let ts = Date.now();
             let date_ob = new Date(ts);
-        
+
             var current_date = date_ob.getDate();
             var current_month = date_ob.getMonth() + 1;
             var current_year = date_ob.getFullYear();
-        
-        
+
+
             var birthDay_date = new Date(`${birth_year}-${birth_month}-${birth_date}`);
             var today_date = new Date(`${current_year}-${current_month}-${current_date}`)
-        
+
             var days = (today_date.getTime() - birthDay_date.getTime()) / 1000;
             days /= (60 * 60 * 24);
             days = Math.ceil(days);
-        
+
             var YearWithMonths = calculated_year;
-        
+
             function getMonthANDDays(years) {
-              return {
-                months: years * 12 + calculated_month,
-                days: calculated_date
-              }
+                return {
+                    months: years * 12 + calculated_month,
+                    days: calculated_date
+                }
             }
-        
+
             var splitMonthsAndDays = getMonthANDDays(YearWithMonths)
-        
+
             var YearsToMonths = parseInt(splitMonthsAndDays.months);
             var restOfMonths = calculated_date;
-        
+
             var MonthsToWeeks = Math.floor(days / 7)
             var restOfWeeks = days % 7
             var WeeksToDays = MonthsToWeeks * 7 + restOfWeeks;
-        
+
             var DaysToHours = WeeksToDays * 24;
-        
+
             var HoursToMinutes = DaysToHours * 60;
-        
+
             var MinutesToSeconds = HoursToMinutes * 60;
-        
+
             var SecondsToMilliseconds = MinutesToSeconds * 1000;
-        
+
             var MillisecondsToMicroSeconds = SecondsToMilliseconds * 1000;
-        
+
             var MicroSecondsToNanoSeconds = MillisecondsToMicroSeconds * 1000;
-        
+
             return [calculated_date, calculated_month, calculated_year, current_date, current_month, current_year, birthDay_date, today_date, days, YearWithMonths, YearsToMonths, restOfMonths, MonthsToWeeks, restOfWeeks, WeeksToDays, DaysToHours, HoursToMinutes, MinutesToSeconds, SecondsToMilliseconds, MillisecondsToMicroSeconds, MicroSecondsToNanoSeconds]
-          }
+        }
 
         function changeBtnName() {
             var elem = document.getElementById("showMoreLessBtn");
-            if (elem.value=="Show Less") {
+            if (elem.value == "Show Less") {
                 elem.value = "Show More"
             } else {
-                    elem.value = "Show Less"
+                elem.value = "Show Less"
             };
         }
-          
+
         function ageCalculator() {
             //collect input from HTML form and convert into date format
             var dob_Year = document.getElementById("dobyear").value;
@@ -112,11 +120,11 @@
             //check user provide input or not
             if (dob_Year == null || dob_Year == '') {
                 msg.innerHTML = "Please provide your Birth Year";
-                setTimeout(() => {msg.innerHTML = ""}, 3000)
+                setTimeout(() => { msg.innerHTML = "" }, 3000)
                 return false;
-            } else if (dob_Day == null || dob_Day == ''){
+            } else if (dob_Day == null || dob_Day == '') {
                 msg.innerHTML = "Please provide your Birth Day";
-                setTimeout(() => {msg.innerHTML = ""}, 3000)
+                setTimeout(() => { msg.innerHTML = "" }, 3000)
                 return false;
             }
 
@@ -124,23 +132,23 @@
             else {
                 //extract the year, month, and date from user date input
                 var dobYear = dob.getFullYear();
-                var dobMonth = dob.getMonth()+1;
+                var dobMonth = dob.getMonth() + 1;
                 var dobDate = dob.getDate();
 
                 // console.table({"Year": dobYear, "Month":dobMonth, "Day": dobDate})
 
                 //get the current date from the system
-                let ts = Date.now();                
+                let ts = Date.now();
                 var now = new Date(ts);
-                
+
                 //extract the year, month, and date from current date
                 var currentYear = now.getFullYear();
-                var currentMonth = now.getMonth()+1;
+                var currentMonth = now.getMonth() + 1;
                 var currentDate = now.getDate();
 
                 var birthDay_date = new Date(`${dobMonth}/${dobDate}/${dobYear}`);
                 var today_date = new Date(`${currentMonth}/${currentDate}/${currentYear}`);
-                
+
 
                 var Difference_In_Time = today_date.getTime() - birthDay_date.getTime();
                 var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
@@ -210,23 +218,23 @@
 
                 //display the calculated age
                 document.getElementById("result").innerHTML = `<h1 style="font-size: 32px; font-family: 'Playfair Display', serif;">${ageString}</h1>`;
-                
+
                 document.getElementById("more-result").innerHTML = "";
                 document.getElementById("moreStuff").innerHTML = "";
 
-                var contents = [`Or ${numberWithCommas(Months)} Months and ${age.days} Days`,`Or ${numberWithCommas(Weeks)} Weeks and ${restOfWeeks} Days`, `Or ${numberWithCommas(age.daysAge)} days`, `Or ${numberWithCommas(Hours)} Hours`, `Or ${numberWithCommas(Minutes)} Minutes`, `Or ${numberWithCommas(Seconds)} Seconds`]
-                var moreStuffList = [ `Or ${numberWithCommas(Milliseconds)} MilliSeconds`, `Or ${numberWithCommas(MicroSeconds)} MicroSeconds`, `Or ${numberWithCommas(NanoSeconds)} NanoSeconds`]
+                var contents = [`Or ${numberWithCommas(Months)} Months and ${age.days} Days`, `Or ${numberWithCommas(Weeks)} Weeks and ${restOfWeeks} Days`, `Or ${numberWithCommas(age.daysAge)} days`, `Or ${numberWithCommas(Hours)} Hours`, `Or ${numberWithCommas(Minutes)} Minutes`, `Or ${numberWithCommas(Seconds)} Seconds`]
+                var moreStuffList = [`Or ${numberWithCommas(Milliseconds)} MilliSeconds`, `Or ${numberWithCommas(MicroSeconds)} MicroSeconds`, `Or ${numberWithCommas(NanoSeconds)} NanoSeconds`]
 
 
-                for (i = 0; i<contents.length; i++){
+                for (i = 0; i < contents.length; i++) {
                     var tag = document.createElement("h3");
                     var text = document.createTextNode(contents[i]);
                     tag.appendChild(text)
                     var element = document.getElementById("more-result");
                     element.appendChild(tag);
                 }
-                
-                for (i = 0; i<moreStuffList.length; i++){
+
+                for (i = 0; i < moreStuffList.length; i++) {
                     var tag = document.createElement("h5");
                     var text = document.createTextNode(moreStuffList[i]);
                     tag.appendChild(text)
@@ -234,14 +242,14 @@
                     element.appendChild(tag);
                 }
                 document.getElementById("moreStuffAria").hidden = false;
-            
+
             }
-            
+
         }
-    </script>    
+    </script>
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="/">Pascaline</a>
+            <a class="navbar-brand" href="/">Pascaline</a>
         </div>
     </nav>
     <div class="container">
@@ -249,51 +257,56 @@
         <br>
         <div class="input-group mb-3">
             <span class="input-group-text" id="inputGroup-sizing-default">YEAR</span>
-            <input type="number" class="form-control" id="dobyear" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
-    </div>
-    <div class="input-group mb-3">
-        <label class="input-group-text" for="inputMonth">MONTH</label>
-        <select class="form-select" name="inputMonth" id="dobmonth">
-            <option value="1">January</option>
-            <option value="2">February</option>
-            <option value="3">March</option>
-            <option value="4">April</option>
-            <option value="5">May</option>
-            <option value="6">June</option>
-            <option value="7">July</option>
-            <option value="8">August</option>
-            <option value="9">September</option>
-            <option value="10">October</option>
-            <option value="11">November</option>
-            <option value="12">December</option>
-        </select>
-    </div>
-  
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="inputGroup-sizing-default">DAY</span>
-        <input type="number" class="form-control" id="dobday" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
-    </div>
-    
-    <input type="submit"  class="btn btn-dark btn-lg" style="margin-bottom: 20px" onclick="ageCalculator()" id="calculateBtn" value="Calculate">
-    
-    <span id="message" style="color:red; margin: 20px"> </span>
-    <br>
-    <div id="full-result">
-    <div id="result"></div>
-    <div id="more-result">
-    </div>
-    <div id="moreStuffAria" hidden=true>
-        <input class="btn btn-dark btn-sm" data-bs-toggle="collapse" href="#multiCollapseExample1" type="button" onclick="changeBtnName()" id="showMoreLessBtn" value="Show More" aria-expanded="false" aria-controls="multiCollapseExample1">
-        <div class="row">
-            <div class="col">
-            <div class="collapse multi-collapse" id="multiCollapseExample1">
-                <div class="card card-body" id="moreStuff">
+            <input type="number" class="form-control" id="dobyear" aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-default" required>
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="inputMonth">MONTH</label>
+            <select class="form-select" name="inputMonth" id="dobmonth">
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">DAY</span>
+            <input type="number" class="form-control" id="dobday" aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-default" required>
+        </div>
+
+        <input type="submit" class="btn btn-dark btn-lg" style="margin-bottom: 20px" onclick="ageCalculator()"
+            id="calculateBtn" value="Calculate">
+
+        <span id="message" style="color:red; margin: 20px"> </span>
+        <br>
+        <div id="full-result">
+            <div id="result"></div>
+            <div id="more-result">
+            </div>
+            <div id="moreStuffAria" hidden=true>
+                <input class="btn btn-dark btn-sm" data-bs-toggle="collapse" href="#multiCollapseExample1" type="button"
+                    onclick="changeBtnName()" id="showMoreLessBtn" value="Show More" aria-expanded="false"
+                    aria-controls="multiCollapseExample1">
+                <div class="row">
+                    <div class="col">
+                        <div class="collapse multi-collapse" id="multiCollapseExample1">
+                            <div class="card card-body" id="moreStuff">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            </div>
         </div>
-    </div>
-    </div>
 
 </body>
 
